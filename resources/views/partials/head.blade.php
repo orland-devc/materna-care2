@@ -1,7 +1,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>{{ config('app.name') . ' – ' . $title ?? config('app.name') }}</title>
+<title>{{ config('app.name') . ' ' . $title ?? config('app.name') }}</title>
 
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="icon" href="{{ asset('images/assets/image-favicon.png') }}" type="image/x-icon" />
