@@ -40,6 +40,4 @@ enum PatientDispositionEnum: string
             self::DIED => 'Patient has died',
         };
     }
-
-    
 }

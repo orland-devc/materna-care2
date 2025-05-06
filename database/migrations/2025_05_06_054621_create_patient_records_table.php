@@ -29,31 +29,31 @@ return new class extends Migration
             $table->string('nationality');
             $table->string('religion');
             $table->string('occupation')->nullable();
-    
+
             $table->string('employer')->nullable();
             $table->string('employerAddress')->nullable();
             $table->string('employerTelNo')->nullable();
-    
+
             $table->string('fatherName')->nullable();
             $table->string('fatherAddress')->nullable();
             $table->string('fatherTelNo')->nullable();
             $table->string('motherName')->nullable();
             $table->string('motherAddress')->nullable();
             $table->string('motherTelNo')->nullable();
-    
+
             $table->dateTime('admissionDate')->default(now());
             $table->dateTime('dischargeDate')->nullable();
             $table->string('totalDays')->nullable();
             $table->string('attendingPhysician');
             $table->string('admissionType');
             $table->string('referredBy')->nullable();
-    
+
             $table->string('socialServiceClass')->nullable();
             $table->string('hospitalizationPlan')->nullable();
             $table->string('healthInsurance')->nullable();
             $table->string('medicareType')->nullable();
             $table->text('allergies')->nullable();
-    
+
             $table->text('admissionDiagnosis')->nullable();
             $table->text('principalDiagnosis')->nullable();
             $table->text('otherDiagnosis')->nullable();
@@ -61,12 +61,12 @@ return new class extends Migration
             $table->text('otherProcedures')->nullable();
             $table->string('accidentDetails')->nullable();
             $table->string('placeOfOccurrence')->nullable();
-    
+
             $table->string('disposition')->nullable();
             $table->string('autopsyStatus')->nullable();
             $table->timestamps();
         });
-    }    
+    }
 
     /**
      * Reverse the migrations.

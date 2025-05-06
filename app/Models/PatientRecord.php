@@ -68,16 +68,16 @@ class PatientRecord extends Model
     ];
 
     protected $casts = [
-        'birthDate'        => 'date',
-        'admissionDate'     => 'datetime',
-        'dischargeDate'     => 'datetime',
-        'sex'               => PatientSexEnum::class,
-        'civilStatus'       => PatientCivilStatus::class,
-        'type'              => PatientTypeEnum::class,
-        'admissionType'     => AdmissionTypeEnum::class,
-        'medicareType'      => PatientMedicareTypeEnum::class,
-        'disposition'       => PatientDispositionEnum::class,
-        'autopsyStatus'     => PatientAutopsyStatusEnum::class,
+        'birthDate' => 'date',
+        'admissionDate' => 'datetime',
+        'dischargeDate' => 'datetime',
+        'sex' => PatientSexEnum::class,
+        'civilStatus' => PatientCivilStatus::class,
+        'type' => PatientTypeEnum::class,
+        'admissionType' => AdmissionTypeEnum::class,
+        'medicareType' => PatientMedicareTypeEnum::class,
+        'disposition' => PatientDispositionEnum::class,
+        'autopsyStatus' => PatientAutopsyStatusEnum::class,
     ];
 
     public function user(): BelongsTo

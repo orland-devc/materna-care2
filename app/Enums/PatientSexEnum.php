@@ -21,5 +21,5 @@ enum PatientSexEnum: string
             self::MALE => 'The patient is a male.',
             self::FEMALE => 'The patient is a female.',
         };
-    }            
+    }
 }
