@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
+        <link rel="icon" href="{{ asset('images/assets/image-favicon.png') }}" type="image/x-icon" />
         @include('partials.head')
     </head>
     <body class="min-h-screen bg-white dark:bg-zinc-800">
@@ -12,8 +13,21 @@
             </a>
 
             <flux:navlist variant="outline">
-                <flux:navlist.group :heading="__('Platform')" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                <flux:navlist.item icon="tachograph-digital" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }} </flux:navlist.item>
+
+                <flux:navlist.group :heading="__('Medical Records')" class="grid">
+                    <flux:navlist.item icon="bed" :href="route('patient-records')" :current="request()->routeIs('patient-records')" wire:navigate>{{ __('Patient Records') }} </flux:navlist.item>
+                    <flux:navlist.item icon="person-pregnant" :href="route('patient-records')" :current="request()->routeIs('patient-records')" wire:navigate>{{ __('Prenatal Care') }} </flux:navlist.item>
+                    <flux:navlist.item icon="baby-carriage" :href="route('patient-records')" :current="request()->routeIs('patient-records')" wire:navigate>{{ __('Postnatal Care') }} </flux:navlist.item>
+                    <flux:navlist.item icon="heart-pulse" :href="route('patient-records')" :current="request()->routeIs('patient-records')" wire:navigate>{{ __('Labor & Delivery') }} </flux:navlist.item>
+                    <flux:navlist.item icon="calendar-check" :href="route('patient-records')" :current="request()->routeIs('patient-records')" wire:navigate>{{ __('Appointments') }} </flux:navlist.item>
+                </flux:navlist.group>
+
+                <flux:navlist.group :heading="__('Administration')" class="grid">
+                    <flux:navlist.item icon="boxes-packing" :href="route('patient-records')" :current="request()->routeIs('patient-records')" wire:navigate>{{ __('Inventory') }} </flux:navlist.item>
+                    <flux:navlist.item icon="user-doctor" :href="route('patient-records')" :current="request()->routeIs('patient-records')" wire:navigate>{{ __('Staff Management') }} </flux:navlist.item>
+                    <flux:navlist.item icon="wallet" :href="route('patient-records')" :current="request()->routeIs('patient-records')" wire:navigate>{{ __('Billing') }} </flux:navlist.item>
+                    <flux:navlist.item icon="chart-line" :href="route('patient-records')" :current="request()->routeIs('patient-records')" wire:navigate>{{ __('Reports & Analytics') }} </flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

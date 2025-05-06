@@ -32,6 +32,7 @@
                             class="font-semibold border-2 border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-600 hover:text-white transition"
                         >
                             Dashboard
+                            <i class="fas fa-house text-lg ml-2"></i>
                         </a>
                     </li>
                 @else
@@ -65,9 +66,9 @@
                     predict risks, and improve patient outcomes through advanced analytics and intuitive design.
                 </p>
                 <div class="flex flex-wrap justify-center md:justify-start gap-4">
-                    <a href="#demo" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded hover:bg-blue-700 transition">
+                    <a href="#demo" class="flex items-center bg-blue-600 text-white font-semibold px-6 py-3 rounded hover:bg-blue-700 transition">
                         Book an Appointment 
-                        <x-lucide-arrow-right class="inline-block ml-2 w-6 h-6" />
+                        <i class="fas fa-arrow-right text-xl ml-2"></i>
                     </a>
                     <a href="#features" class="border-2 border-blue-600 text-blue-600 font-semibold px-6 py-3 rounded hover:bg-blue-600 hover:text-white transition">
                         Explore Features
