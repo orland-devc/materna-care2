@@ -22,4 +22,11 @@ enum PatientSexEnum: string
             self::FEMALE => 'The patient is a female.',
         };
     }
+
+    public static function options(): array
+    {
+        return collect(self::cases())
+            ->mapWithKeys(fn ($case) => [$case->value => $case->getLabel()])
+            ->toArray();
+    }
 }

@@ -13,21 +13,22 @@ return new class extends Migration
     {
         Schema::create('patient_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->string('patient_code')->unique();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('medrec_code')->unique();
             $table->string('type')->nullable();
-            $table->string('lastName');
-            $table->string('firstName');
+            $table->string('lastName')->nullable();
+            $table->string('firstName')->nullable();
             $table->string('middleName')->nullable();
-            $table->text('permanentAddress');
+            $table->string('wardSerice')->nullable();
+            $table->text('permanentAddress')->nullable();
             $table->string('telephoneNumber')->nullable();
-            $table->string('sex');
-            $table->string('civilStatus');
-            $table->dateTime('birthDate');
-            $table->string('age');
-            $table->string('birthPlace');
-            $table->string('nationality');
-            $table->string('religion');
+            $table->string('sex')->nullable();
+            $table->string('civilStatus')->nullable();
+            $table->dateTime('birthDate')->nullable();
+            $table->string('age')->nullable();
+            $table->string('birthPlace')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('religion')->nullable();
             $table->string('occupation')->nullable();
 
             $table->string('employer')->nullable();
@@ -41,11 +42,13 @@ return new class extends Migration
             $table->string('motherAddress')->nullable();
             $table->string('motherTelNo')->nullable();
 
-            $table->dateTime('admissionDate')->default(now());
-            $table->dateTime('dischargeDate')->nullable();
+            $table->date('admissionDate')->nullable();
+            $table->string('admissionTime')->nullable();
+            $table->date('dischargeDate')->nullable();
+            $table->string('dischargeTime')->nullable();
             $table->string('totalDays')->nullable();
-            $table->string('attendingPhysician');
-            $table->string('admissionType');
+            $table->string('attendingPhysician')->nullable();
+            $table->string('admissionType')->nullable();
             $table->string('referredBy')->nullable();
 
             $table->string('socialServiceClass')->nullable();
@@ -53,6 +56,11 @@ return new class extends Migration
             $table->string('healthInsurance')->nullable();
             $table->string('medicareType')->nullable();
             $table->text('allergies')->nullable();
+
+            $table->string('informant')->nullable();
+            $table->string('relationship')->nullable();
+            $table->string('informantAddress')->nullable();
+            $table->string('informantTelNo')->nullable();
 
             $table->text('admissionDiagnosis')->nullable();
             $table->text('principalDiagnosis')->nullable();
