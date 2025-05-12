@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MaternaCare - Comprehensive Maternal Health Management System</title>
+    <title>MaternaCare</title>
     <link rel="icon" href="{{ asset('images/assets/image-favicon.png') }}" type="image/x-icon" />
     
     @vite('resources/css/app.css')

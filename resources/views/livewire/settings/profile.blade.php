@@ -6,9 +6,8 @@
             <flux:input wire:model="name" :label="__('Name')" type="text" required autofocus autocomplete="name" />
 
             <div>
-                <flux:input wire:model="email" :label="__('Email')" type="email" required autocomplete="email" />
-
                 @if (auth()->user()->email_verified_at === null)
+                    <flux:input wire:model="email" :label="__('Email')" type="email" required autocomplete="email" />
                     <div>
                         <flux:text class="mt-4">
                             {{ __('Your email address is unverified.') }}
@@ -24,6 +23,14 @@
                             </flux:text>
                         @endif
                     </div>
+                @else
+                    <x-label class="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                        {{ __('Email') }}
+                        <span class="text-sm font-normal ml-1 text-blue-600 dark:text-blue-400">
+                            <i class="fas fa-circle-check"></i>
+                        </span>
+                    </x-label>
+                    <flux:input wire:model="email" type="email" required readonly autocomplete="email" />
                 @endif
             </div>
 

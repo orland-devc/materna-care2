@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PatientRecordController;
+use App\Http\Controllers\PrenatalCareController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -20,11 +21,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('settings/profile', Profile::class)->name('settings.profile');
     Route::get('settings/password', Password::class)->name('settings.password');
     Route::get('settings/appearance', Appearance::class)->name('settings.appearance');
+});
 
-    // Route::get('patient-records', function () {
-    //     return view('welcome');
-    // })->name('patient-records');
-
+Route::middleware(['auth', 'verified'])->group(function () {
     // CREATE
     Route::get('/patient-records/create', [PatientRecordController::class, 'create'])->name('patient-records.create');
     Route::post('/patient-records', [PatientRecordController::class, 'store'])->name('patient-records.store');
@@ -38,7 +37,24 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/patient-records/{patientRecord}', [PatientRecordController::class, 'update'])->name('patient-records.update');
 
     // DELETE
-    Route::delete('/patient-records/{patientRecord}', [PatientRecordController::class, 'destroy'])->name('patient-records.destroy');
+    Route::delete('/patient-records/{patientRecord}', [PatientRecordController::class, 'destroy'])->name('patient-records.destroy');    
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    // CREATE
+    Route::get('/prenatal-care/create', [PrenatalCareController::class, 'create'])->name('prenatal-care.create');
+    Route::post('/prenatal-care', [PrenatalCareController::class, 'store'])->name('prenatal-care.store');
+
+    // READ
+    Route::get('/prenatal-care', [PrenatalCareController::class, 'index'])->name('prenatal-care');
+    Route::get('/prenatal-care/{patientRecord}', [PrenatalCareController::class, 'show'])->name('prenatal-care.show');
+
+    // UPDATE
+    Route::get('/prenatal-care/{patientRecord}/edit', [PrenatalCareController::class, 'edit'])->name('prenatal-care.edit');
+    Route::put('/prenatal-care/{patientRecord}', [PrenatalCareController::class, 'update'])->name('prenatal-care.update');
+
+    // DELETE
+    Route::delete('/prenatal-care/{patientRecord}', [PrenatalCareController::class, 'destroy'])->name('prenatal-care.destroy');    
 });
 
 Route::get('patient-record', [PatientRecordController::class, 'index'])->name('patient-record');

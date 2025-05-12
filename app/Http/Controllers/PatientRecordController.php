@@ -20,7 +20,7 @@ class PatientRecordController extends Controller
     public function index()
     {
         // Fetch all patient records
-        $patientRecords = PatientRecord::all();
+        $patientRecords = PatientRecord::all()->sortByDesc('created_at');
 
         // Return the view with the patient records
         return view('livewire.admin.patient-records.patient-record', compact('patientRecords'));
@@ -129,7 +129,16 @@ class PatientRecordController extends Controller
      */
     public function edit(PatientRecord $patientRecord)
     {
-        //
+        return view('livewire.admin.patient-records.edit', [
+            'patientRecord' => $patientRecord,
+            'admissionTypes' => AdmissionTypeEnum::options(),
+            'autopsyStatuses' => PatientAutopsyStatusEnum::options(),
+            'civilStatuses' => PatientCivilStatus::options(),
+            'dispositions' => PatientDispositionEnum::options(),
+            'medicareTypes' => PatientMedicareTypeEnum::options(),
+            'patientSexes' => PatientSexEnum::options(),
+            'patientTypes' => PatientTypeEnum::options(),
+        ]);
     }
 
     /**
@@ -145,6 +154,41 @@ class PatientRecordController extends Controller
      */
     public function destroy(PatientRecord $patientRecord)
     {
-        //
+        $patientRecord->delete();
+
+        return redirect()->route('patient-records')
+            ->with('status', 'Patient record deleted successfully!');
+    }
+
+    /**
+     * Redirect to the patient records page.
+     */
+    public function redirectToPatientRecords()
+    {
+        return redirect()->route('patient-records');
+    }
+
+    /**
+     * soft delete the patient record.
+     */
+    public function softDelete(PatientRecord $patientRecord)
+    {
+        $patientRecord->soft_delete = true;
+        $patientRecord->save();
+
+        return redirect()->route('patient-records')
+            ->with('status', 'Patient record has been moved to trash!');
+    }
+
+    /**
+     * Restore the soft deleted patient record.
+     */
+    public function restore(PatientRecord $patientRecord)
+    {
+        $patientRecord->soft_delete = false;
+        $patientRecord->save();
+
+        return redirect()->route('patient-records')
+            ->with('status', 'Patient record has been restored!');
     }
 }
