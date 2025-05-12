@@ -37,7 +37,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/patient-records/{patientRecord}', [PatientRecordController::class, 'update'])->name('patient-records.update');
 
     // DELETE
-    Route::delete('/patient-records/{patientRecord}', [PatientRecordController::class, 'destroy'])->name('patient-records.destroy');    
+    Route::delete('/patient-records/{patientRecord}', [PatientRecordController::class, 'destroy'])->name('patient-records.destroy');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -54,7 +54,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/prenatal-care/{patientRecord}', [PrenatalCareController::class, 'update'])->name('prenatal-care.update');
 
     // DELETE
-    Route::delete('/prenatal-care/{patientRecord}', [PrenatalCareController::class, 'destroy'])->name('prenatal-care.destroy');    
+    Route::delete('/prenatal-care/{patientRecord}', [PrenatalCareController::class, 'destroy'])->name('prenatal-care.destroy');
 });
 
 Route::get('patient-record', [PatientRecordController::class, 'index'])->name('patient-record');
