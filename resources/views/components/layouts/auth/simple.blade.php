@@ -3,7 +3,13 @@
     <head>
         @include('partials.head')
         <link rel="icon" href="{{ asset('images/assets/image-favicon.png') }}" type="image/x-icon" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
     </head>
+    <style>
+        body {
+            font-family: 'Poppins';
+        }
+    </style>
     <body class="min-h-screen bg-white antialiased dark:bg-linear-to-b dark:from-neutral-950 dark:to-neutral-900">
         <div class="bg-background flex min-h-svh flex-col items-center justify-center gap-6 p-6 md:p-10">
             <div class="flex w-full max-w-sm flex-col gap-2">

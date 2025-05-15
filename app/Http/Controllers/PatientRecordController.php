@@ -19,10 +19,8 @@ class PatientRecordController extends Controller
      */
     public function index()
     {
-        // Fetch all patient records
         $patientRecords = PatientRecord::all()->sortByDesc('created_at');
 
-        // Return the view with the patient records
         return view('livewire.admin.patient-records.patient-record', compact('patientRecords'));
     }
 
@@ -31,8 +29,6 @@ class PatientRecordController extends Controller
      */
     public function create()
     {
-        $patientTypes = PatientTypeEnum::options();
-
         return view('livewire.admin.patient-records.create', [
             'admissionTypes' => AdmissionTypeEnum::options(),
             'autopsyStatuses' => PatientAutopsyStatusEnum::options(),
@@ -51,14 +47,14 @@ class PatientRecordController extends Controller
     {
         $validated = $request->validate([
             'user_id' => 'nullable|exists:users,id',
-            'medrec_code' => 'nullable|string|max:255|unique:patient_records,medrec_code',
             'type' => 'nullable|string|max:255',
             'lastName' => 'nullable|string|max:255',
             'firstName' => 'nullable|string|max:255',
             'middleName' => 'nullable|string|max:255',
-            'wardSerice' => 'nullable|string|max:255',
+            'wardService' => 'nullable|string|max:255',
             'permanentAddress' => 'nullable|string|max:500',
             'telephoneNumber' => 'nullable|string|max:50',
+            'email' => 'nullable|email|max:255',
             'sex' => 'nullable|string|max:255',
             'civilStatus' => 'nullable|string|max:255',
             'age' => 'nullable|integer|min:0',
@@ -121,7 +117,7 @@ class PatientRecordController extends Controller
      */
     public function show(PatientRecord $patientRecord)
     {
-        //
+        return view('livewire.admin.patient-records.show', compact('patientRecord'));
     }
 
     /**
@@ -146,7 +142,70 @@ class PatientRecordController extends Controller
      */
     public function update(Request $request, PatientRecord $patientRecord)
     {
-        //
+        $validated = $request->validate([
+            'user_id' => 'nullable|exists:users,id',
+            'type' => 'nullable|string|max:255',
+            'lastName' => 'nullable|string|max:255',
+            'firstName' => 'nullable|string|max:255',
+            'middleName' => 'nullable|string|max:255',
+            'wardService' => 'nullable|string|max:255',
+            'permanentAddress' => 'nullable|string|max:500',
+            'telephoneNumber' => 'nullable|string|max:50',
+            'email' => 'nullable|email|max:255',
+            'sex' => 'nullable|string|max:255',
+            'civilStatus' => 'nullable|string|max:255',
+            'age' => 'nullable|integer|min:0',
+            'birthDate' => 'nullable',
+            'birthPlace' => 'nullable|string|max:255',
+            'nationality' => 'nullable|string|max:255',
+            'religion' => 'nullable|string|max:255',
+            'occupation' => 'nullable|string|max:255',
+
+            'employer' => 'nullable|string|max:255',
+            'employerAddress' => 'nullable|string|max:500',
+            'employerTelNo' => 'nullable|string|max:50',
+
+            'fatherName' => 'nullable|string|max:255',
+            'fatherAddress' => 'nullable|string|max:500',
+            'fatherTelNo' => 'nullable|string|max:50',
+            'motherName' => 'nullable|string|max:255',
+            'motherAddress' => 'nullable|string|max:500',
+            'motherTelNo' => 'nullable|string|max:50',
+
+            'admissionDate' => 'nullable|date',
+            'dischargeDate' => 'nullable|date|after_or_equal:admissionDate',
+            'totalDays' => 'nullable|integer|min:0',
+            'attendingPhysician' => 'nullable|string|max:255',
+            'admissionType' => 'nullable|string|max:255',
+            'referredBy' => 'nullable|string|max:255',
+
+            'socialServiceClass' => 'nullable|string|max:255',
+            'hospitalizationPlan' => 'nullable|string|max:255',
+            'healthInsurance' => 'nullable|string|max:255',
+            'medicareType' => 'nullable|string|max:255',
+            'allergies' => 'nullable|string',
+
+            'informant' => 'nullable|string|max:255',
+            'relationship' => 'nullable|string|max:255',
+            'informantAddress' => 'nullable|string|max:500',
+            'informantTelNo' => 'nullable|string|max:50',
+
+            'admissionDiagnosis' => 'nullable|string',
+            'principalDiagnosis' => 'nullable|string',
+            'otherDiagnosis' => 'nullable|string',
+            'principalProcedure' => 'nullable|string',
+            'otherProcedures' => 'nullable|string',
+            'accidentDetails' => 'nullable|string',
+            'placeOfOccurrence' => 'nullable|string|max:255',
+            'disposition' => 'nullable|string|max:255',
+            'autopsyStatus' => 'nullable|string|max:255',
+        ]);
+
+        $patientRecord->update($validated);
+
+        return redirect()->back()
+            ->with('status', 'Patient record updated successfully!');
+
     }
 
     /**
@@ -173,7 +232,7 @@ class PatientRecordController extends Controller
      */
     public function softDelete(PatientRecord $patientRecord)
     {
-        $patientRecord->soft_delete = true;
+        $patientRecord->softDelete = true;
         $patientRecord->save();
 
         return redirect()->route('patient-records')
@@ -185,7 +244,7 @@ class PatientRecordController extends Controller
      */
     public function restore(PatientRecord $patientRecord)
     {
-        $patientRecord->soft_delete = false;
+        $patientRecord->softDelete = false;
         $patientRecord->save();
 
         return redirect()->route('patient-records')

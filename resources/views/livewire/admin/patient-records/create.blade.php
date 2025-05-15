@@ -8,6 +8,7 @@
 
         <form method="POST" action="{{ route('patient-records.store') }}" class="flex flex-col gap-6">
             @csrf
+            <x-input class="hidden" name="user_id" value="{{ Auth::user()->id }}" />
 
             <!-- Basic Info -->
             <div class="border-t pt-3">
@@ -57,8 +58,8 @@
                     <x-input label="Nationality" name="nationality" value="{{ old('nationality') }}" />
                     <x-input label="Religion" name="religion" value="{{ old('religion') }}" />
     
-                    <x-input label="Birth Date" name="birthDate" type="date" value="{{ old('birthDate') }}" />
-                    <x-input label="Age" name="age" value="{{ old('age') }}" />
+                    <x-input label="Birth Date" name="birthDate" type="date" value="{{ old('birthDate') }}" id="birthDate"/>
+                    <x-input label="Age" name="age" id="age" readOnly />
                     <x-input label="Birth Place" name="birthPlace" value="{{ old('birthPlace') }}" />
                     <x-input label="Occupation" name="occupation" value="{{ old('occupation') }}" />
                 </div>
@@ -91,8 +92,7 @@
             <div class="border-t pt-3">
                 <h2 class="text-lg font-semibold mb-4">{{ __('Admission Info') }}</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <x-input label="Admission Date" name="admissionDate" type="date" value="{{ old('admissionDate') }}" /> 
-                    <x-input label="Admission Time" name="admissionTime" type="time" value="{{ old('admissionDate') }}" />
+                    <x-input label="Admission Date" name="admissionDate" type="datetime-local" value="{{ old('admissionDate') }}" /> 
                     <x-input label="Discharge Date" name="dischargeDate" type="date" value="{{ old('dischargeDate') }}" />
                 </div>
             </div>
@@ -101,7 +101,6 @@
             <div class="border-t pt-3">
                 <h2 class="text-lg font-semibold mb-4">{{ __('Discharge Info') }}</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <x-input label="Discharge Time" name="dischargeTime" type="time" value="{{ old('dischargeTime') }}" />
                     <x-input label="Total Days" name="totalDays" type="number" value="{{ old('totalDays') }}" />
                     <x-input label="Attending Physician" name="attendingPhysician" value="{{ old('attendingPhysician') }}" />
                     <x-input label="Referred By" name="referredBy" value="{{ old('referredBy') }}" />
@@ -174,8 +173,28 @@
 
             <!-- Submit -->
             <div class="flex justify-end">
-                <x-button type="submit">{{ __('Save Patient Record') }}</x-button>
+                <button class="px-4 py-2.5 text-sm rounded-md dark:bg-gray-50 bg-blue-500 dark:hover:bg-gray-200 hover:bg-blue-600 text-white dark:text-gray-800 transition-all cursor-pointer" type="submit">
+                    {{ __('Save Patient Record') }}
+                </button>
             </div>
         </form>
     </div>
 </x-layouts.app>
+
+<script>
+    document.getElementById('birthDate').addEventListener('change', function() {
+        const birthDate = new Date(this.value);
+        const today = new Date();
+        
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+        const dayDiff = today.getDate() - birthDate.getDate();
+
+        // Adjust age if the birthday hasn't occurred yet this year
+        if (monthDiff < 0 || (monthDiff === 0 && dayDiff < 0)) {
+            age--;
+        }
+
+        document.getElementById('age').value = age > 0 ? age : 0; // Ensure age is not negative
+    });
+</script>

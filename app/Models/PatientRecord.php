@@ -25,9 +25,10 @@ class PatientRecord extends Model
         'lastName',
         'firstName',
         'middleName',
-        'wardSerice',
+        'wardService',
         'permanentAddress',
         'telephoneNumber',
+        'email',
         'sex',
         'civilStatus',
         'birthDate',
@@ -80,9 +81,6 @@ class PatientRecord extends Model
     ];
 
     protected $casts = [
-        'birthDate' => 'date',
-        'admissionDate' => 'date',
-        'dischargeDate' => 'date',
         'sex' => PatientSexEnum::class,
         'civilStatus' => PatientCivilStatus::class,
         'type' => PatientTypeEnum::class,
@@ -91,6 +89,16 @@ class PatientRecord extends Model
         'disposition' => PatientDispositionEnum::class,
         'autopsyStatus' => PatientAutopsyStatusEnum::class,
     ];
+
+    public function fullName()
+    {
+        return $this->firstName.' '.$this->middleName.' '.$this->lastName;
+    }
+
+    public function formalName()
+    {
+        return $this->lastName.', '.$this->firstName.' '.$this->middleName;
+    }
 
     public function user(): BelongsTo
     {

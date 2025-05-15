@@ -5,70 +5,74 @@
             <flux:subheading size="lg" class="mb-6">{{ __('Manage all admission records.') }}</flux:subheading>
         </div>
         <a href="{{ route('patient-records.create') }}"
-           class="inline-flex items-center px-4 py-2.5 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 transition-colors duration-200 ease-in-out shadow-sm">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-            </svg>
+           class="inline-flex items-center justify-center px-4 py-2.5 bg-blue-500 text-white dark:text-gray-800 text-sm font-medium rounded-lg hover:bg-blue-600 dark:bg-gray-50 dark:hover:bg-gray-200 transition-all duration-200 ease-in-out shadow-sm">
+            <x-lucide-plus class="h-5 w-5 mr-2"/>
             {{ __('Add New Record') }}
         </a>
     </div>
 
-    <div class="overflow-hidden border border-zinc-200 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-900 rounded-lg">
+    <!-- Search Bar -->
+    <div class="mb-6">
+        <div class="relative flex flex-col md:flex-row md:items-center md:justify-between">
+            <div class="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
+                <x-lucide-search class="w-5 h-5 text-gray-500 dark:text-gray-400" />
+            </div>
+            <input
+                type="text"
+                id="patient-search"
+                class="inline-flex bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 lg:w-1/3 md:w-1/2 pl-10 p-2.5"
+                placeholder="Search by medical record number or patient name..."
+            >
+        </div>
+    </div>
+
+    <div class="overflow-hidden border border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900 rounded-lg">
         <div class="overflow-x-auto">
-            <table class="min-w-full divide-y divide-zinc-200 dark:divide-zinc-700">
+            <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                 <thead>
                     <tr>
-                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Med. Record No.</th>
-                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Name</th>
-                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Status</th>
-                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Type</th>
-                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Date Admitted</th>
-                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Time Admitted</th>
-                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Discharge</th>
-                        <th scope="col" class="px-3 py-3 text-right text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider">Actions</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Med. Record No.</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Name</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Status</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Type</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Date Admitted</th>
+                        <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Discharge</th>
+                        <th scope="col" class="px-3 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody class="bg-white dark:bg-zinc-900 divide-y divide-zinc-100 dark:divide-zinc-800">
+                <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-100 dark:divide-gray-800">
                     @forelse($patientRecords as $record)
-                        <tr class="hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors duration-150">
-                            <td class="px-3 py-3 whitespace-nowrap text-sm font-medium text-zinc-700 dark:text-zinc-300">{{ $record->medrec_code }}</td>
-                            <td class="px-3 py-3 whitespace-nowrap text-sm text-zinc-700 dark:text-zinc-300">
-                                {{ $record->lastName }}, {{ $record->firstName }} {{ $record->middleName }}
+                        <tr class="patient-record-row hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-150" 
+                            data-medrec="{{ $record->medrec_code }}" 
+                            data-name="{{ $record->formalName() }}">
+                            <td class="px-3 py-3 whitespace-nowrap text-sm font-medium text-gray-700 dark:text-gray-300">{{ $record->medrec_code }}</td>
+                            <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
+                                {{ $record->formalName() }}
                             </td>
-                            <td class="px-3 py-3 whitespace-nowrap text-sm text-zinc-700 dark:text-zinc-300">
+                            <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
                                 {{ $record->disposition->name ?? '-' }}
                             </td>
-                            <td class="px-3 py-3 whitespace-nowrap text-sm text-zinc-700 dark:text-zinc-300">
+                            <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
                                 {{ $record->type->name ?? '-' }}
                             </td>
-                            <td class="px-3 py-3 whitespace-nowrap text-sm text-zinc-700 dark:text-zinc-300">
+                            <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
                                 @if($record->admissionDate)
                                     <span class="flex items-center">
                                         <x-lucide-calendar class="h-4 w-4 mr-1.5 text-blue-600 dark:text-blue-400" />
-                                        {{ $record->admissionDate->format('M d, Y') }}
+                                        {{ $record->admissionDate ? date('M d, Y \a\t h:i A', strtotime($record->admissionDate)) : '' }}
                                     </span>
                                 @else
-                                    <span class="text-zinc-400 dark:text-zinc-500">-</span>
+                                    <span class="text-gray-400 dark:text-gray-500">-</span>
                                 @endif
                             </td>
-                            <td class="px-3 py-3 whitespace-nowrap text-sm text-zinc-700 dark:text-zinc-300">
-                                @if($record->admissionTime)
-                                    <span class="flex items-center">
-                                        <x-lucide-clock class="h-4 w-4 mr-1.5 text-blue-600 dark:text-blue-400" />
-                                        {{ $record->admissionTime }}
-                                    </span>
-                                @else
-                                    <span class="text-zinc-400 dark:text-zinc-500">-</span>
-                                @endif
-                            </td>
-                            <td class="px-3 py-3 whitespace-nowrap text-sm text-zinc-700 dark:text-zinc-300">
+                            <td class="px-3 py-3 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
                                 @if($record->dischargeDate)
                                     <span class="flex items-center">
                                         <x-lucide-circle-check-big class="h-4 w-4 mr-1.5 text-teal-600 dark:text-teal-400" />
-                                        {{ $record->dischargeDate->format('M d, Y') }}
+                                        {{ $record->dischargeDate ? date('M d, Y \a\t h:i A', strtotime($record->dischargeDate)) : '' }}
                                     </span>
                                 @else
-                                    <span class="text-zinc-400 dark:text-zinc-500">-</span>
+                                    <span class="text-gray-400 dark:text-gray-500">-</span>
                                 @endif
                             </td>
                             <td class="px-3 py-3 whitespace-nowrap text-right text-sm font-medium">
@@ -79,7 +83,7 @@
                                         <x-lucide-eye class="h-5 w-5" />
                                     </a>
                                     <a href="{{ route('patient-records.edit', $record) }}"
-                                       class="text-zinc-600 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-300 transition-colors">
+                                       class="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300 transition-colors">
                                         <span class="sr-only">Edit</span>
                                         <x-lucide-square-pen class="h-5 w-5" />
                                     </a>
@@ -98,14 +102,25 @@
                             </td>
                         </tr>
                     @empty
-                        <tr>
-                            <td colspan="6" class="px-3 py-12 text-center">
+                        <tr id="no-records-row" class="hidden">
+                            <td colspan="8" class="px-3 py-12 text-center">
                                 <div class="flex flex-col items-center justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-zinc-300 dark:text-zinc-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-300 dark:text-gray-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </svg>
-                                    <p class="text-zinc-500 dark:text-zinc-400 text-lg font-medium">{{ __('No patient records found') }}</p>
-                                    <p class="text-zinc-400 dark:text-zinc-500 text-sm mt-1">{{ __('Add a new record to get started') }}</p>
+                                    <p class="text-gray-500 dark:text-gray-400 text-lg font-medium" id="no-records-message">{{ __('No matching records found') }}</p>
+                                    <p class="text-gray-400 dark:text-gray-500 text-sm mt-1">{{ __('Try adjusting your search') }}</p>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr id="empty-records-row">
+                            <td colspan="8" class="px-3 py-12 text-center">
+                                <div class="flex flex-col items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-300 dark:text-gray-600 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    <p class="text-gray-500 dark:text-gray-400 text-lg font-medium">{{ __('No patient records found') }}</p>
+                                    <p class="text-gray-400 dark:text-gray-500 text-sm mt-1">{{ __('Add a new record to get started') }}</p>
                                 </div>
                             </td>
                         </tr>
@@ -114,4 +129,52 @@
             </table>
         </div>
     </div>
+
+    <!-- JavaScript for Real-time Search -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('patient-search');
+            const patientRows = document.querySelectorAll('.patient-record-row');
+            const noRecordsRow = document.getElementById('no-records-row');
+            const emptyRecordsRow = document.getElementById('empty-records-row');
+            
+            // Check if we have any patient records
+            const hasRecords = patientRows.length > 0;
+            
+            if (hasRecords) {
+                // Hide the empty state row if we have records
+                if (emptyRecordsRow) {
+                    emptyRecordsRow.classList.add('hidden');
+                }
+            }
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase().trim();
+                let visibleCount = 0;
+                
+                // Only perform search if we have records
+                if (hasRecords) {
+                    patientRows.forEach(row => {
+                        const medrecCode = row.getAttribute('data-medrec').toLowerCase();
+                        const patientName = row.getAttribute('data-name').toLowerCase();
+                        
+                        // Check if the row matches the search term
+                        if (medrecCode.includes(searchTerm) || patientName.includes(searchTerm)) {
+                            row.classList.remove('hidden');
+                            visibleCount++;
+                        } else {
+                            row.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Show or hide "no results" message
+                    if (visibleCount === 0 && searchTerm !== '') {
+                        noRecordsRow.classList.remove('hidden');
+                    } else {
+                        noRecordsRow.classList.add('hidden');
+                    }
+                }
+            });
+        });
+    </script>
 </x-layouts.app>

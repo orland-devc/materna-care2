@@ -24,33 +24,34 @@ $iconClasses = Flux::classes($square ? 'size-5!' : 'size-4!');
 $classes = Flux::classes()
     ->add('h-10 lg:h-8 relative flex items-center gap-3 rounded-lg')
     ->add($square ? 'px-2.5!' : '')
-    ->add('py-0 text-start w-full px-3 mt-0 mb-2')
-    ->add('text-zinc-500 dark:text-white/80')
+    ->add('py-5 text-start w-full px-4 mt-0')
+    ->add('text-gray-500 dark:text-white/80')
+    ->add('transition-all duration-200 ease-in-out')
     ->add(match ($variant) {
         'outline' => match ($accent) {
             true => [
-                'data-current:text-(--color-accent-content) hover:data-current:text-(--color-accent-content)',
-                'data-current:bg-blue-200 dark:data-current:bg-indigo-700 dark:data-current:text-white',
-                'hover:text-zinc-800 dark:hover:text-white dark:hover:bg-white/[7%] hover:bg-zinc-800/5',
+                'data-current:text-(--color-accent-content)',
+                'data-current:bg-blue-500 dark:data-current:bg-gray-50 data-current:text-white dark:data-current:text-gray-800',
+                'dark:hover:text-white dark:hover:bg-white/[7%] hover:bg-zinc-800/5',
                 'border border-transparent',
             ],
             false => [
                 'data-current:text-zinc-800 dark:data-current:text-zinc-100 data-current:border-zinc-200',
                 'data-current:bg-white dark:data-current:bg-white/10 data-current:border data-current:border-zinc-200 dark:data-current:border-white/10 data-current:shadow-xs',
-                'hover:text-zinc-800 dark:hover:text-white',
+                'dark:hover:text-white',
             ],
         },
         default => match ($accent) {
             true => [
-                'data-current:text-(--color-accent-content) hover:data-current:text-(--color-accent-content)',
-                'data-current:bg-blue-200 dark:data-current:bg-indigo-700 dark:data-current:text-white',
-                'hover:text-zinc-800 dark:hover:text-white dark:hover:bg-white/[7%] hover:bg-zinc-800/5',
+                'data-current:text-(--color-accent-content)',
+                'data-current:bg-blue-500 dark:data-current:bg-gray-50 data-current:text-white dark:data-current:text-gray-800',
+                'dark:hover:text-white dark:hover:bg-white/[7%] hover:bg-zinc-800/5',
                 'border border-transparent',
             ],
             false => [
                 'data-current:text-zinc-800 dark:data-current:text-zinc-100',
                 'data-current:bg-zinc-800/[4%] dark:data-current:bg-white/10',
-                'hover:text-zinc-800 dark:hover:text-white hover:bg-zinc-800/[4%] dark:hover:bg-white/10',
+                'dark:hover:text-white hover:bg-zinc-800/[4%] dark:hover:bg-white/10',
             ],
         },
     })

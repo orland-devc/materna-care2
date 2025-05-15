@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('lastName')->nullable();
             $table->string('firstName')->nullable();
             $table->string('middleName')->nullable();
-            $table->string('wardSerice')->nullable();
+            $table->string('wardService')->nullable();
             $table->text('permanentAddress')->nullable();
             $table->string('telephoneNumber')->nullable();
+            $table->string('email')->nullable();
             $table->string('sex')->nullable();
             $table->string('civilStatus')->nullable();
             $table->dateTime('birthDate')->nullable();
@@ -42,10 +43,8 @@ return new class extends Migration
             $table->string('motherAddress')->nullable();
             $table->string('motherTelNo')->nullable();
 
-            $table->date('admissionDate')->nullable();
-            $table->string('admissionTime')->nullable();
-            $table->date('dischargeDate')->nullable();
-            $table->string('dischargeTime')->nullable();
+            $table->dateTime('admissionDate')->nullable();
+            $table->dateTime('dischargeDate')->nullable();
             $table->string('totalDays')->nullable();
             $table->string('attendingPhysician')->nullable();
             $table->string('admissionType')->nullable();
@@ -72,6 +71,8 @@ return new class extends Migration
 
             $table->string('disposition')->nullable();
             $table->string('autopsyStatus')->nullable();
+
+            $table->boolean('softDelete')->default(0);
             $table->timestamps();
         });
     }
