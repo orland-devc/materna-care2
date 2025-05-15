@@ -24,6 +24,7 @@ class ScoringChartController extends Controller
     public function create()
     {
         $patientRecords = PatientRecord::where('softDelete', false)->get();
+
         return view('livewire.admin.APGAR.create', compact('patientRecords'));
     }
 
@@ -79,6 +80,7 @@ class ScoringChartController extends Controller
     public function edit(ScoringChart $scoringChart)
     {
         $patientRecords = PatientRecord::where('softDelete', false)->get();
+
         return view('livewire.admin.APGAR.edit', compact('scoringChart, patientRecords'));
     }
 

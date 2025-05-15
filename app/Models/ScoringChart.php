@@ -39,5 +39,4 @@ class ScoringChart extends Model
     {
         return $this->belongsTo(PatientRecord::class);
     }
-
 }
