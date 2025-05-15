@@ -122,7 +122,12 @@
             <div class="border-t pt-3">
                 <h2 class="text-lg font-semibold mb-4">{{ __('Insurance & Social Info') }}</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <x-input label="Social Service Class" name="socialServiceClass" value="{{ old('socialServiceClass') }}" />
+                    <x-select label="Social Service Classification" name="socialServiceClass">
+                        <option value="" disabled selected>Select Type</option>
+                        @foreach (App\Enums\SocialServiceTypeEnum::options() as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                    </x-select>
                     <x-input label="Hospitalization Plan" name="hospitalizationPlan" value="{{ old('hospitalizationPlan') }}" />
                     <x-input label="Health Insurance" name="healthInsurance" value="{{ old('healthInsurance') }}" />
 

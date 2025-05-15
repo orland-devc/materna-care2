@@ -9,6 +9,7 @@ use App\Enums\PatientDispositionEnum;
 use App\Enums\PatientMedicareTypeEnum;
 use App\Enums\PatientSexEnum;
 use App\Enums\PatientTypeEnum;
+use App\Enums\SocialServiceTypeEnum;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -84,6 +85,7 @@ class PatientRecord extends Model
         'sex' => PatientSexEnum::class,
         'civilStatus' => PatientCivilStatus::class,
         'type' => PatientTypeEnum::class,
+        'socialServiceClass' => SocialServiceTypeEnum::class,
         'admissionType' => AdmissionTypeEnum::class,
         'medicareType' => PatientMedicareTypeEnum::class,
         'disposition' => PatientDispositionEnum::class,
