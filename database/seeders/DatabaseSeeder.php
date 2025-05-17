@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\PatientRecord;
+use App\Models\ScoringChart;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -62,7 +63,7 @@ class DatabaseSeeder extends Seeder
             'attendingPhysician' => 'Dr. Jose P. Rizal',
             'admissionType' => 'new',
             'referredBy' => 'Orland Sayson',
-            'socialServiceClass' => 'A',
+            'socialServiceClass' => 'a',
             'hospitalizationPlan' => 'Manulife',
             'healthInsurance' => 'PhilHealth (PH456789132)',
             'medicareType' => 'gsis-member',
@@ -84,5 +85,67 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->command->info("Patient {$record->medrec_code} created successfully");
+
+        $record2 = PatientRecord::create([
+            'user_id' => 1,
+            'medrec_code' => 'REC-2505-0002',
+            'type' => 'infant',
+            'lastName' => 'Sayson',
+            'firstName' => 'Louis Oliver',
+            'middleName' => 'Marbella',
+            'wardService' => 'Prenatal Care',
+            'permanentAddress' => 'General Mariano Alvarez, Cavite',
+            'telephoneNumber' => null,
+            'email' => null,
+            'sex' => 'male',
+            'civilStatus' => 'single',
+            'birthDate' => '2028-05-28',
+            'age' => '0',
+            'birthPlace' => 'General Mariano Alvarez, Cavite',
+            'nationality' => 'Filipino',
+            'religion' => 'Iglesia Ni Cristo',
+            'occupation' => null,
+            'employer' => null,
+            'employerAddress' => null,
+            'employerTelNo' => null,
+            'fatherName' => 'Orland Benniedict Sayson',
+            'fatherAddress' => 'General Mariano Alvarez, Cavite',
+            'fatherTelNo' => '09938424059',
+            'motherName' => 'Levi Sayson',
+            'motherAddress' => 'General Mariano Alvarez, Cavite',
+            'motherTelNo' => '09915346922',
+            'admissionDate' => '2025-05-15T13:53',
+            'dischargeDate' => null,
+            'totalDays' => null,
+            'attendingPhysician' => 'Dr. Jose P. Rizal',
+            'admissionType' => 'new',
+            'referredBy' => 'Tropa',
+            'socialServiceClass' => 'a',
+            'hospitalizationPlan' => 'Manulife',
+            'healthInsurance' => 'PhilHealth (PH456789132)',
+            'medicareType' => 'gsis-member',
+            'allergies' => null,
+            'informant' => null,
+            'relationship' => null,
+            'informantAddress' => null,
+            'informantTelNo' => null,
+            'admissionDiagnosis' => null,
+            'principalDiagnosis' => null,
+            'otherDiagnosis' => null,
+            'principalProcedure' => null,
+            'otherProcedures' => null,
+            'accidentDetails' => null,
+            'placeOfOccurrence' => null,
+            'disposition' => 'improved',
+            'autopsyStatus' => 'no-autopsy',
+            'softDelete' => 0,
+        ]);
+
+        $this->command->info("Patient {$record2->medrec_code} created successfully");
+
+        $chart = ScoringChart::create([
+            'patient_admission_id' => 1,
+        ]);
+
     }
 }

@@ -55,12 +55,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/scoring-chart', [ScoringChartController::class, 'store'])->name('scoring-chart.store');
 
     Route::get('/scoring-chart', [ScoringChartController::class, 'index'])->name('scoring-chart');
-    Route::get('/scoring-chart/{patientRecord}', [ScoringChartController::class, 'show'])->name('scoring-chart.show');
+    Route::get('/scoring-chart/{scoringChart}', [ScoringChartController::class, 'show'])->name('scoring-chart.show');
 
-    Route::get('/scoring-chart/{patientRecord}/edit', [ScoringChartController::class, 'edit'])->name('scoring-chart.edit');
-    Route::put('/scoring-chart/{patientRecord}', [ScoringChartController::class, 'update'])->name('scoring-chart.update');
+    Route::get('/scoring-chart/{scoringChart}/edit', [ScoringChartController::class, 'edit'])->name('scoring-chart.edit');
+    Route::put('/scoring-chart/{scoringChart}', [ScoringChartController::class, 'update'])->name('scoring-chart.update');
 
-    Route::delete('/scoring-chart/{patientRecord}', [ScoringChartController::class, 'destroy'])->name('scoring-chart.destroy');
+    Route::delete('/scoring-chart/{scoringChart}', [ScoringChartController::class, 'destroy'])->name('scoring-chart.destroy');
 });
 
 Route::get('patient-record', [PatientRecordController::class, 'index'])->name('patient-record');

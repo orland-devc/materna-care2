@@ -2,10 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ScoringChart extends Model
 {
+    use HasFactory;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'patient_admission_id',
 
@@ -16,17 +25,17 @@ class ScoringChart extends Model
         'reflexes',
         'color',
 
-        '5heartRate',
-        '5respiratory',
-        '5muscleTone',
-        '5reflexes',
-        '5color',
+        'five_heartRate',
+        'five_respiratory',
+        'five_muscleTone',
+        'five_reflexes',
+        'five_color',
 
-        '10heartRate',
-        '10respiratory',
-        '10muscleTone',
-        '10reflexes',
-        '10color',
+        'ten_heartRate',
+        'ten_respiratory',
+        'ten_muscleTone',
+        'ten_reflexes',
+        'ten_color',
 
         'otherHeartRate',
         'otherRespiratory',
@@ -35,8 +44,8 @@ class ScoringChart extends Model
         'otherColor',
     ];
 
-    public function patientRecord()
+    public function patientRecord(): BelongsTo
     {
-        return $this->belongsTo(PatientRecord::class);
+        return $this->belongsTo(PatientRecord::class, 'patient_admission_id');
     }
 }

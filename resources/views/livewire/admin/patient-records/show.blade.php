@@ -1,6 +1,6 @@
 <x-layouts.app :title="$patientRecord->medrec_code">
-    <div class="flex flex-col gap-6">
-        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+    <div class="max-w-5xl mx-auto md:px-4 md:py-6 flex flex-col gap-4">
+        <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between pb-3">
             <div>
                 <flux:heading size="xl" level="1">
                     Patient Record: {{ $patientRecord->formalName() }}
@@ -14,7 +14,7 @@
                 <a href="{{ route('patient-records.edit', $patientRecord) }}"
                    class="inline-flex items-center px-4 py-2.5 bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200 text-sm font-medium rounded-lg hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-200 ease-in-out shadow-sm">
                     <x-lucide-square-pen class="h-5 w-5 mr-2" />
-                    {{ __('Edit Record') }}
+                    {{ __('Edit') }}
                 </a>
         
                 <form method="POST" action="{{ route('patient-records.destroy', $patientRecord) }}"
@@ -31,7 +31,7 @@
                 <a href="{{ route('patient-records') }}"
                    class="inline-flex items-center px-4 py-2.5 bg-blue-500 text-white dark:text-gray-800 dark:bg-gray-50 text-sm font-medium rounded-lg hover:bg-blue-600 dark:hover:bg-gray-200 transition-all duration-200 ease-in-out shadow-sm">
                     <x-lucide-chevron-left class="h-5 w-5 mr-2" />
-                    {{ __('Back to Records') }}
+                    {{ __('Back') }}
                 </a>
             </div>
         </div>        
@@ -40,8 +40,11 @@
 
         <!-- Basic Info -->
         <div class="border-t border-gray-300 dark:border-gray-600 pt-3">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Basic Info') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-user h-5 w-5 mr-2 text-blue-500"></i>
+                <h2 class="text-lg font-semibold">{{ __('Basic Info') }}</h2>
+            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="border border-gray-300 dark:border-gray-600 p-3 rounded-md bg-gray-50 dark:bg-gray-900">
                     <p class="text-xs text-gray-500 dark:text-gray-400">Type</p>
                     <p>{{ $patientRecord->type->getLabel() }}</p>
@@ -135,8 +138,11 @@
 
         <!-- Employer Info -->
         <div class="border-t border-gray-300 dark:border-gray-600 pt-3">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Employer Info') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-id-card h-5 w-5 mr-2 text-blue-500"></i>
+                <h2 class="text-lg font-semibold">{{ __('Employer Info') }}</h2>
+            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="border border-gray-300 dark:border-gray-600 p-3 rounded-md bg-gray-50 dark:bg-gray-900">
                     <p class="text-xs text-gray-500 dark:text-gray-400">Employer</p>
                     <p>{{ $patientRecord->employer }}</p>
@@ -156,8 +162,11 @@
 
         <!-- Family Info -->
         <div class="border-t border-gray-300 dark:border-gray-600 pt-3">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Family Info') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-people-roof h-5 w-5 mr-2 text-blue-500"></i>
+                <h2 class="text-lg font-semibold">{{ __('Family Info') }}</h2>
+            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="border border-gray-300 dark:border-gray-600 p-3 rounded-md bg-gray-50 dark:bg-gray-900">
                     <p class="text-xs text-gray-500 dark:text-gray-400">Father Name</p>
                     <p>{{ $patientRecord->fatherName }}</p>
@@ -192,8 +201,11 @@
 
         <!-- Admission Info -->
         <div class="border-t border-gray-300 dark:border-gray-600 pt-3">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Admission Info') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-hospital h-5 w-5 mr-2 text-blue-500"></i>
+                <h2 class="text-lg font-semibold">{{ __('Admission Info') }}</h2>
+            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="border border-gray-300 dark:border-gray-600 p-3 rounded-md bg-gray-50 dark:bg-gray-900">
                     <p class="text-xs text-gray-500 dark:text-gray-400">Admission Date</p>
                     <p>{{ $patientRecord->admissionDate ? date('M d, Y \a\t h:i A', strtotime($patientRecord->admissionDate)) : '' }}</p>
@@ -225,8 +237,11 @@
 
         <!-- Informant Details -->
         <div class="border-t border-gray-300 dark:border-gray-600 pt-3">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Informant Details') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-user-tag h-5 w-5 mr-2 text-blue-500"></i>
+                <h2 class="text-lg font-semibold">{{ __('Informant Details') }}</h2>
+            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="border border-gray-300 dark:border-gray-600 p-3 rounded-md bg-gray-50 dark:bg-gray-900">
                     <p class="text-xs text-gray-500 dark:text-gray-400">Informant Name</p>
                     <p>{{ $patientRecord->informant }}</p>
@@ -251,8 +266,11 @@
 
         <!-- Insurance & Social Info -->
         <div class="border-t border-gray-300 dark:border-gray-600 pt-3">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Insurance & Social Info') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-shield-halved h-5 w-5 mr-2 text-blue-500"></i>
+                <h2 class="text-lg font-semibold">{{ __('Insurance & Social Info') }}</h2>
+            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="border border-gray-300 dark:border-gray-600 p-3 rounded-md bg-gray-50 dark:bg-gray-900">
                     <p class="text-xs text-gray-500 dark:text-gray-400">Social Service Class</p>
                     <p>{{ $patientRecord->socialServiceClass->getLabel() }} ({{ $patientRecord->socialServiceClass->getDescription() }})</p>
@@ -277,8 +295,11 @@
 
         <!-- Diagnosis & Procedures -->
         <div class="border-t border-gray-300 dark:border-gray-600 pt-3">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Diagnosis & Procedures') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-stethoscope h-5 w-5 mr-2 text-blue-500"></i>
+                <h2 class="text-lg font-semibold">{{ __('Diagnosis & Procedures') }}</h2>
+            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="border border-gray-300 dark:border-gray-600 p-3 rounded-md bg-gray-50 dark:bg-gray-900">
                     <p class="text-xs text-gray-500 dark:text-gray-400">Allergies</p>
                     <p class="whitespace-pre-line">{{ $patientRecord->allergies }}</p>
@@ -313,7 +334,10 @@
 
         <!-- Accident Info -->
         <div class="border-t border-gray-300 dark:border-gray-600 pt-3">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Accident Info') }}</h2>
+            <div class="flex items-center mb-3">
+                <i class="fas fa-kit-medical h-5 w-5 mr-2 text-blue-500"></i>
+                <h2 class="text-lg font-semibold">{{ __('Accident Info') }}</h2>
+            </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="border border-gray-300 dark:border-gray-600 p-3 rounded-md bg-gray-50 dark:bg-gray-900">
                     <p class="text-xs text-gray-500 dark:text-gray-400">Accident Details</p>
@@ -329,8 +353,11 @@
 
         <!-- Disposition Info -->
         <div class="border-t border-gray-300 dark:border-gray-600 pt-3 mb-6">
-            <h2 class="text-lg font-semibold mb-4">{{ __('Disposition Info') }}</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="flex items-center mb-3">
+                <i class="fas fa-person-circle-question h-5 w-5 mr-2 text-blue-500"></i>
+                <h2 class="text-lg font-semibold">{{ __('Disposition Info') }}</h2>
+            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div class="border border-gray-300 dark:border-gray-600 p-3 rounded-md bg-gray-50 dark:bg-gray-900">
                     <p class="text-xs text-gray-500 dark:text-gray-400">Disposition</p>
                     <p>{{ $patientRecord->disposition->getLabel() }}</p>

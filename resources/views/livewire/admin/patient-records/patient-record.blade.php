@@ -1,7 +1,7 @@
-<x-layouts.app :title="__('Patient Records')">
+<x-layouts.app :title="__('Admission Records')">
     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
         <div>
-            <flux:heading size="xl" level="1">{{ __('Patient Records') }}</flux:heading>
+            <flux:heading size="xl" level="1">{{ __('Patient Admission Records') }}</flux:heading>
             <flux:subheading size="lg" class="mb-6">{{ __('Manage all admission records.') }}</flux:subheading>
         </div>
         <a href="{{ route('patient-records.create') }}"

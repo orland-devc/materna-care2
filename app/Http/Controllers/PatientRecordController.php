@@ -19,7 +19,9 @@ class PatientRecordController extends Controller
      */
     public function index()
     {
-        $patientRecords = PatientRecord::all()->sortByDesc('created_at');
+        $patientRecords = PatientRecord::where('softDelete', false)
+            ->get()
+            ->sortByDesc('created_at');
 
         return view('livewire.admin.patient-records.patient-record', compact('patientRecords'));
     }
@@ -46,7 +48,7 @@ class PatientRecordController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'user_id' => 'nullable|exists:users,id',
+            'user_id' => 'nullable|integer|exists:users,id',
             'type' => 'nullable|string|max:255',
             'lastName' => 'nullable|string|max:255',
             'firstName' => 'nullable|string|max:255',
@@ -108,7 +110,7 @@ class PatientRecordController extends Controller
 
         $patientRecord = PatientRecord::create($validated);
 
-        return redirect()->route('patient-records')
+        return redirect()->route('patient-records.show')
             ->with('status', 'Patient record created successfully!');
     }
 

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('scoring_charts', function (Blueprint $table) {
             $table->id();
-            $table->string('patient_admission_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('patient_admission_id')->nullable()->constrained('patient_records')->nullOnDelete();
             $table->dateTime('dateScored')->nullable();
             $table->integer('heartRate')->nullable();
             $table->integer('respiratory')->nullable();
@@ -21,17 +21,17 @@ return new class extends Migration
             $table->integer('reflexes')->nullable();
             $table->integer('color')->nullable();
 
-            $table->integer('5heartRate')->nullable();
-            $table->integer('5respiratory')->nullable();
-            $table->integer('5muscleTone')->nullable();
-            $table->integer('5reflexes')->nullable();
-            $table->integer('5color')->nullable();
+            $table->integer('five_heartRate')->nullable();
+            $table->integer('five_respiratory')->nullable();
+            $table->integer('five_muscleTone')->nullable();
+            $table->integer('five_reflexes')->nullable();
+            $table->integer('five_color')->nullable();
 
-            $table->integer('10heartRate')->nullable();
-            $table->integer('10respiratory')->nullable();
-            $table->integer('10muscleTone')->nullable();
-            $table->integer('10reflexes')->nullable();
-            $table->integer('10color')->nullable();
+            $table->integer('ten_heartRate')->nullable();
+            $table->integer('ten_respiratory')->nullable();
+            $table->integer('ten_muscleTone')->nullable();
+            $table->integer('ten_reflexes')->nullable();
+            $table->integer('ten_color')->nullable();
 
             $table->integer('otherHeartRate')->nullable();
             $table->integer('otherRespiratory')->nullable();

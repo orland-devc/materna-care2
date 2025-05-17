@@ -13,9 +13,9 @@ class ScoringChartController extends Controller
      */
     public function index()
     {
-        $charts = ScoringChart::all()->sortByDesc('created_at');
+        $scoringCharts = ScoringChart::all()->sortByDesc('created_at');
 
-        return view('livewire.admin.APGAR.index', compact('patientRecords'));
+        return view('livewire.admin.APGAR.index', compact('scoringCharts'));
     }
 
     /**
@@ -23,9 +23,11 @@ class ScoringChartController extends Controller
      */
     public function create()
     {
-        $patientRecords = PatientRecord::where('softDelete', false)->get();
+        $patients = PatientRecord::where('softDelete', false)
+            ->get()
+            ->where('type', 'infant');
 
-        return view('livewire.admin.APGAR.create', compact('patientRecords'));
+        return view('livewire.admin.APGAR.create', compact('patients'));
     }
 
     /**
@@ -34,36 +36,36 @@ class ScoringChartController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'patient_record_id' => 'required|exists:patient_records,id',
-            'dateScored' => 'required|string|max:255',
-            'heartRate' => 'nullable|int|max:255',
-            'respiratory' => 'nullable|int|max:255',
-            'reflexes' => 'nullable|int|max:255',
-            'color' => 'nullable|int|max:255',
+            'patient_admission_id' => 'required|exists:patient_records,id',
+            'dateScored' => 'required',
+            'heartRate' => 'nullable|integer|max:255',
+            'respiratory' => 'nullable|integer|max:255',
+            'reflexes' => 'nullable|integer|max:255',
+            'color' => 'nullable|integer|max:255',
 
-            '5heartRate' => 'nullable|int|max:255',
-            '5respiratory' => 'nullable|int|max:255',
-            '5muscleTone' => 'nullable|int|max:255',
-            '5reflexes' => 'nullable|int|max:255',
-            '5color' => 'nullable|int|max:255',
+            'five_heartRate' => 'nullable|integer|max:255',
+            'five_respiratory' => 'nullable|integer|max:255',
+            'five_muscleTone' => 'nullable|integer|max:255',
+            'five_reflexes' => 'nullable|integer|max:255',
+            'five_color' => 'nullable|integer|max:255',
 
-            '10heartRate' => 'nullable|int|max:255',
-            '10respiratory' => 'nullable|int|max:255',
-            '10muscleTone' => 'nullable|int|max:255',
-            '10reflexes' => 'nullable|int|max:255',
-            '10color' => 'nullable|int|max:255',
+            'ten_heartRate' => 'nullable|integer|max:255',
+            'ten_respiratory' => 'nullable|integer|max:255',
+            'ten_muscleTone' => 'nullable|integer|max:255',
+            'ten_reflexes' => 'nullable|integer|max:255',
+            'ten_color' => 'nullable|integer|max:255',
 
-            'otherHeartRate' => 'nullable|int|max:255',
-            'otherRespiratory' => 'nullable|int|max:255',
-            'otherMuscleTone' => 'nullable|int|max:255',
-            'otherReflexes' => 'nullable|int|max:255',
-            'otherColor' => 'nullable|int|max:255',
+            'otherHeartRate' => 'nullable|integer|max:255',
+            'otherRespiratory' => 'nullable|integer|max:255',
+            'otherMuscleTone' => 'nullable|integer|max:255',
+            'otherReflexes' => 'nullable|integer|max:255',
+            'otherColor' => 'nullable|integer|max:255',
         ]);
 
         $chart = ScoringChart::create($validated);
 
         return redirect()->route('scoring-chart')
-            ->with('status', 'APGAR Scoring Chart created succesfully!');
+            ->with('status', 'APGAR Scoring Chart created successfully!');
     }
 
     /**
@@ -81,7 +83,7 @@ class ScoringChartController extends Controller
     {
         $patientRecords = PatientRecord::where('softDelete', false)->get();
 
-        return view('livewire.admin.APGAR.edit', compact('scoringChart, patientRecords'));
+        return view('livewire.admin.APGAR.edit', compact('scoringChart', 'patientRecords'));
     }
 
     /**
@@ -90,33 +92,32 @@ class ScoringChartController extends Controller
     public function update(Request $request, ScoringChart $scoringChart)
     {
         $validated = $request->validate([
-            'patient_record_id' => 'sometimes|exists:patient_records,id',
-            'dateScored' => 'sometimes|string|max:255',
-            'heartRate' => 'nullable|string|max:255',
-            'respiratory' => 'nullable|string|max:255',
-            'reflexes' => 'nullable|string|max:255',
-            'color' => 'nullable|string|max:255',
+            'heartRate' => 'nullable|integer|max:255',
+            'respiratory' => 'nullable|integer|max:255',
+            'muscleTone'  => 'nullable|integer|max:255',
+            'reflexes' => 'nullable|integer|max:255',
+            'color' => 'nullable|integer|max:255',
 
-            '5heartRate' => 'nullable|string|max:255',
-            '5respiratory' => 'nullable|string|max:255',
-            '5muscleTone' => 'nullable|string|max:255',
-            '5reflexes' => 'nullable|string|max:255',
-            '5color' => 'nullable|string|max:255',
+            'five_heartRate' => 'nullable|integer|max:255',
+            'five_respiratory' => 'nullable|integer|max:255',
+            'five_muscleTone' => 'nullable|integer|max:255',
+            'five_reflexes' => 'nullable|integer|max:255',
+            'five_color' => 'nullable|integer|max:255',
 
-            '10heartRate' => 'nullable|string|max:255',
-            '10respiratory' => 'nullable|string|max:255',
-            '10muscleTone' => 'nullable|string|max:255',
-            '10reflexes' => 'nullable|string|max:255',
-            '10color' => 'nullable|string|max:255',
+            'ten_heartRate' => 'nullable|integer|max:255',
+            'ten_respiratory' => 'nullable|integer|max:255',
+            'ten_muscleTone' => 'nullable|integer|max:255',
+            'ten_reflexes' => 'nullable|integer|max:255',
+            'ten_color' => 'nullable|integer|max:255',
 
-            'otherHeartRate' => 'nullable|string|max:255',
-            'otherRespiratory' => 'nullable|string|max:255',
-            'otherMuscleTone' => 'nullable|string|max:255',
-            'otherReflexes' => 'nullable|string|max:255',
-            'otherColor' => 'nullable|string|max:255',
+            'otherHeartRate' => 'nullable|integer|max:255',
+            'otherRespiratory' => 'nullable|integer|max:255',
+            'otherMuscleTone' => 'nullable|integer|max:255',
+            'otherReflexes' => 'nullable|integer|max:255',
+            'otherColor' => 'nullable|integer|max:255',
         ]);
 
-        $chart = ScoringChart::update($validated);
+        $scoringChart->update($validated);
 
         return redirect()->back()
             ->with('status', 'APGAR Scoring Chart created succesfully!');

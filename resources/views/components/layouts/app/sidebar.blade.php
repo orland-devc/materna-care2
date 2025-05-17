@@ -24,11 +24,12 @@
 
                 <flux:navlist.group :heading="__('Records & Services')" class="grid">
                     <flux:navlist.item icon="bed" :href="route('patient-records')" :current="str_contains(request()->path(), 'patient-records')" wire:navigate>
-                        {{ __('Patient Records') }}
+                        {{ __('Admission Records') }}
                     </flux:navlist.item>
-                    <flux:navlist.item icon="stethoscope" :href="route('prenatal-care')" :current="request()->routeIs('prenatal-care')" wire:navigate>{{ __('Prenatal Care') }} </flux:navlist.item>
+                    {{-- <flux:navlist.item icon="stethoscope" :href="route('prenatal-care')" :current="request()->routeIs('prenatal-care')" wire:navigate>{{ __('Prenatal Care') }} </flux:navlist.item>
                     <flux:navlist.item icon="baby-carriage" :href="route('patient-record')" :current="request()->routeIs('patient-record')" wire:navigate>{{ __('Postnatal Care') }} </flux:navlist.item>
-                    <flux:navlist.item icon="heart-pulse" :href="route('patient-record')" :current="request()->routeIs('patient-record')" wire:navigate>{{ __('Labor & Delivery') }} </flux:navlist.item>
+                    <flux:navlist.item icon="heart-pulse" :href="route('patient-record')" :current="request()->routeIs('patient-record')" wire:navigate>{{ __('Labor & Delivery') }} </flux:navlist.item> --}}
+                    <flux:navlist.item icon="baby-carriage" :href="route('scoring-chart')" :current="str_contains(request()->path(), 'scoring-chart')" wire:navigate>{{ __('APGAR Chart Records') }} </flux:navlist.item>
                     <flux:navlist.item icon="calendar-check" :href="route('patient-record')" :current="request()->routeIs('patient-record')" wire:navigate>{{ __('Appointments') }} </flux:navlist.item>
                 </flux:navlist.group>
 

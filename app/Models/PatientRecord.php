@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PatientRecord extends Model
 {
@@ -23,6 +24,7 @@ class PatientRecord extends Model
         'user_id',
         'medrec_code',
         'type',
+        'admissionType',
         'lastName',
         'firstName',
         'middleName',
@@ -56,7 +58,6 @@ class PatientRecord extends Model
         'dischargeTime',
         'totalDays',
         'attendingPhysician',
-        'admissionType',
         'referredBy',
 
         'socialServiceClass',
@@ -105,6 +106,11 @@ class PatientRecord extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scoringCharts(): HasMany
+    {
+        return $this->hasMany(ScoringChart::class);
     }
 
     protected static function booted()
