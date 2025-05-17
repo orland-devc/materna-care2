@@ -94,7 +94,7 @@ class ScoringChartController extends Controller
         $validated = $request->validate([
             'heartRate' => 'nullable|integer|max:255',
             'respiratory' => 'nullable|integer|max:255',
-            'muscleTone'  => 'nullable|integer|max:255',
+            'muscleTone' => 'nullable|integer|max:255',
             'reflexes' => 'nullable|integer|max:255',
             'color' => 'nullable|integer|max:255',
 
